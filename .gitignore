@@ -1,0 +1,23 @@
+# Composer
+/vendor/
+composer.lock
+
+# PHPStan
+.phpstan/
+
+# Nette Tester
+tests/tmp/
+tests/output/
+tests/**/.actual/
+tests/**/*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.phar

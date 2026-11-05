@@ -1,0 +1,49 @@
+{
+    "name": "phloxcz/firebird-database",
+    "description": "Firebird driver for Nette Database, on top of PDO_Firebird.",
+    "keywords": ["nette", "database", "firebird", "pdo"],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/phloxcz/firebird-database",
+    "authors": [
+        {
+            "name": "Phlox",
+            "homepage": "https://github.com/phloxcz"
+        }
+    ],
+    "require": {
+        "php": ">=8.4",
+        "ext-pdo": "*",
+        "ext-pdo_firebird": "*",
+        "nette/database": "^3.2",
+        "nette/utils": "^4.0"
+    },
+    "require-dev": {
+        "nette/caching": "^3.2",
+        "nette/tester": "^2.5",
+        "phpstan/phpstan": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phlox\\FirebirdDatabase\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "tester tests -C -j 1",
+        "phpstan": "phpstan analyse",
+        "check": [
+            "@phpstan",
+            "@test"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.1-dev"
+        }
+    }
+}
