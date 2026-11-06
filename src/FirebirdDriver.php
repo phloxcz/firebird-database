@@ -36,6 +36,9 @@ use Nette\Database\ResultSet;
 final class FirebirdDriver implements Nette\Database\Driver
 {
     /** SQLCODE, which is what PDO_Firebird reports for a failed statement */
+    /** What phloxcz/entity-database asks about: insert() has to get a new key by RETURNING */
+    public const SupportInsertReturning = 'insertReturning';
+
     private const ErrorUnique = -803;
     private const ErrorForeignKey = -530;
     private const ErrorNotNull = -625;
@@ -88,10 +91,15 @@ final class FirebirdDriver implements Nette\Database\Driver
         $connection->setRowNormalizer($this->normalizeRow(...));
     }
 
+    /**
+     * @param string $feature One of what Nette knows, or self::SupportInsertReturning
+     */
     public function isSupported(string $feature): bool
     {
         return $feature === self::SupportMultiColumnAsOrCondition
-            || $feature === self::SupportSubselect;
+            || $feature === self::SupportSubselect
+            // PDO_Firebird can't tell the last ID, so phloxcz/entity-database asks for it this way
+            || $feature === self::SupportInsertReturning;
     }
 
     public function convertException(\PDOException $e): Nette\Database\DriverException

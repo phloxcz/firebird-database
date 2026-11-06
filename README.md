@@ -46,7 +46,7 @@ An expression or a column under another name can't be looked up, and it's judged
 
 ## Limits of Firebird and PDO
 
-- **The ID of a new row.** PDO_Firebird has no `lastInsertId()`. An insert with the key given returns its row, as usual. Without it, on an identity column, it returns the number of rows. Use `RETURNING` to get the key:
+- **The ID of a new row.** PDO_Firebird has no `lastInsertId()`. An insert with the key given returns its row, as usual. Without it, [`phloxcz/entity-database`](../phlox-entity-database) asks by `RETURNING` on its own, so its `insert()` gives the entity, whether the key comes from an identity column or from a trigger. Plain Nette Database returns the number of rows, so use `RETURNING` there to get the key:
 
   ```php
   $id = $connection->fetchField('INSERT INTO BOOKS (TITLE) VALUES (?) RETURNING ID', $title);
